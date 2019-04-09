@@ -11,19 +11,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace Merenda.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Aluno")]
-    public class AlunoController : Controller
-    {   //teste
-    
-        public AlunoRepository _repository;
-        public AlunoController(Context context)
+    [Route("api/Estoque")]
+    public class EstoqueController : Controller
+    {
+        public EstoqueRepository _repository;
+        public EstoqueController(Context context)
         {
-            _repository = new AlunoRepository(context);
+            _repository = new EstoqueRepository(context);
         }
 
 
         [HttpGet]
-        public IQueryable<Aluno> GetAll()
+        public IQueryable<Estoque> GetAll()
         {
             return _repository.GetAll();
         }
@@ -32,7 +31,7 @@ namespace Merenda.Controllers
         public IActionResult GetById(int id)
         {
             var entity = _repository.GetById(id);
-            if(entity == null)
+            if (entity == null)
             {
                 return NotFound();
             }
@@ -40,15 +39,9 @@ namespace Merenda.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Aluno entity)
+        public IActionResult Create([FromBody] Estoque entity)
         {
-           /* entity = new Aluno(){
-                Matricula = "1234",
-                Curso = "cidsds",
-                Nome = "JJJJ"
-            }; */
-            Console.WriteLine("teste", entity.Nome);
-            if(entity == null)
+            if (entity == null)
             {
                 return BadRequest("A entidade não pode ser null");
             }
@@ -60,9 +53,9 @@ namespace Merenda.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Aluno entity)
+        public IActionResult Update(int id, [FromBody] Estoque entity)
         {
-            if(entity == null)
+            if (entity == null)
             {
                 return BadRequest();
             }
@@ -81,6 +74,5 @@ namespace Merenda.Controllers
             _repository.Delete(id);
             return Ok();
         }
-
     }
 }

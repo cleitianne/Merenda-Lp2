@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Merenda.Migrations
 {
-    public partial class firstMigration : Migration
+    public partial class SecondMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,7 @@ namespace Merenda.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: true),
-                    Matricula = table.Column<int>(nullable: false),
+                    Matricula = table.Column<string>(nullable: true),
                     CursoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
