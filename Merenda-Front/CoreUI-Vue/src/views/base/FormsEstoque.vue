@@ -86,11 +86,13 @@ export default {
       
       let Estoque = {
         Item: this.Item,
-        Codigo: this.Codigo,
-        QtdUtilizada: this.QtdUtilizada,
-        QtdEstoque: this.QtdEstoque,
-        Valor: this.Valor
+        COD: parseInt(this.Codigo),
+        QtdUtilizada: parseInt(this.QtdUtilizada),
+        QtdEstoque: parseInt(this.QtdEstoque),
+        Valor: parseFloat(this.Valor),
+        Descricao: this.Descricao
       }
+      console.log('Estoque', Estoque)
       let services = new Service('Estoque').create(Estoque).then(
         success => {
           console.log('sucesso', success); 

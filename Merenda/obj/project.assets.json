@@ -13436,11 +13436,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\wj070\\Desktop\\Merenda\\Merenda\\Merenda\\Merenda.csproj",
+      "projectUniqueName": "C:\\Users\\wj070\\Desktop\\Merenda\\Merenda\\Merenda-Lp2\\Merenda\\Merenda.csproj",
       "projectName": "Merenda",
-      "projectPath": "C:\\Users\\wj070\\Desktop\\Merenda\\Merenda\\Merenda\\Merenda.csproj",
+      "projectPath": "C:\\Users\\wj070\\Desktop\\Merenda\\Merenda\\Merenda-Lp2\\Merenda\\Merenda.csproj",
       "packagesPath": "C:\\Users\\wj070\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\wj070\\Desktop\\Merenda\\Merenda\\Merenda\\obj\\",
+      "outputPath": "C:\\Users\\wj070\\Desktop\\Merenda\\Merenda\\Merenda-Lp2\\Merenda\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

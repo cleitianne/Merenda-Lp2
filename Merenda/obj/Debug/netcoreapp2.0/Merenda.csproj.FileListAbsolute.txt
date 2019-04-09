@@ -20,3 +20,4 @@ C:\Users\wj070\Desktop\Merenda\Merenda\Merenda\obj\Debug\netcoreapp2.0\Merenda.A
 C:\Users\wj070\Desktop\Merenda\Merenda\Merenda\obj\Debug\netcoreapp2.0\Merenda.AssemblyInfo.cs
 C:\Users\wj070\Desktop\Merenda\Merenda\Merenda\obj\Debug\netcoreapp2.0\Merenda.dll
 C:\Users\wj070\Desktop\Merenda\Merenda\Merenda\obj\Debug\netcoreapp2.0\Merenda.pdb
+C:\Users\wj070\Desktop\Merenda\Merenda\Merenda-Lp2\Merenda\bin\Debug\netcoreapp2.0\Merenda.dll
