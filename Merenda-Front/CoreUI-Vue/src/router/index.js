@@ -16,6 +16,7 @@ const Widgets = () => import('@/views/Widgets')
 // Views - Components
 const Cards = () => import('@/views/base/Cards')
 const Forms = () => import('@/views/base/Forms')
+const FormsEstoque = () => import('@/views/base/FormsEstoque')
 const Switches = () => import('@/views/base/Switches')
 const Tables = () => import('@/views/base/Tables')
 const Tabs = () => import('@/views/base/Tabs')
@@ -138,10 +139,11 @@ export default new Router({
               name: 'Cards',
               component: Cards
             },
+            
             {
-              path: 'forms',
-              name: 'Forms',
-              component: Forms
+              path: 'formsEstoque',
+              name: 'FormsEstoque',
+              component: FormsEstoque
             },
             {
               path: 'switches',
