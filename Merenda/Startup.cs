@@ -33,7 +33,7 @@ namespace Merenda
                 options.AddPolicy("merenda",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:8080", "http://178.128.174.100:8080", "http://178.128.174.100") //Url Front-End
+                        policy.WithOrigins("http://localhost:8080", "http://10.20.30.20:8080","http://178.128.174.100:8080", "http://178.128.174.100") //Url Front-End
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowCredentials();

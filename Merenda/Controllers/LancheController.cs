@@ -11,13 +11,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace Merenda.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Lanche")]
+    [Route("api/Lanche/")]
     public class LancheController : Controller
     {
         public LancheRepository _repository;
+        public AlunoRepository _alunoRepository;
         public LancheController(Context context)
         {
             _repository = new LancheRepository(context);
+            _alunoRepository = new AlunoRepository(context);
         }
 
 
@@ -72,6 +74,11 @@ namespace Merenda.Controllers
                 return NotFound();
             }
             _repository.Delete(id);
+            return Ok();
+        }
+        [HttpGet("aluno")]
+        public IActionResult alunoPegaMerenda(string AlunoMatricula) {
+            //_alunoRepository
             return Ok();
         }
     }
