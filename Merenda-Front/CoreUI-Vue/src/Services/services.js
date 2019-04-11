@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 
-const baseUrl = 'http://localhost:49933/api/'
+const baseUrl = 'http://10.20.30.9:49933/api/'
 
 export default class ApiService {
   constructor (serviceName) {

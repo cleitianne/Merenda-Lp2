@@ -145,6 +145,13 @@ export default new Router({
               name: 'FormsEstoque',
               component: FormsEstoque
             },
+            
+            {
+              path: 'formsAlunos',
+              name: 'FormsAlunos',
+              component: Forms
+            },
+
             {
               path: 'switches',
               name: 'Switches',
