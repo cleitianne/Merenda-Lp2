@@ -4,14 +4,14 @@
       <transition name="slide">
       <b-card :header="caption">
         <b-table :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" responsive="sm" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" @row-clicked="rowClicked">
-          <template slot="id" slot-scope="data">
-            <strong>{{data.item.id}}</strong>
+          <template slot="nome" slot-scope="data">
+            <strong>{{data.item.nome}}</strong>
           </template>
-          <template slot="name" slot-scope="data">
-            <strong>{{data.item.name}}</strong>
+          <template slot="matricula" slot-scope="data">
+            <strong>{{data.item.matricula}}</strong>
           </template>
-          <template slot="status" slot-scope="data">
-            <b-badge :variant="getBadge(data.item.status)">{{data.item.status}}</b-badge>
+         <template slot="curso" slot-scope="data">
+            <strong>{{data.item.curso}}</strong>
           </template>
         </b-table>
         <nav>
@@ -25,12 +25,13 @@
 
 <script>
 import usersData from './UsersData'
+import Services from '../../Services/services.js'
 export default {
   name: 'Users',
   props: {
     caption: {
       type: String,
-      default: 'Users'
+      default: 'Alunos'
     },
     hover: {
       type: Boolean,
@@ -57,7 +58,6 @@ export default {
     return {
       items: usersData.filter((user) => user.id < 42),
       fields: [
-        {key: 'id'},
         {key: 'nome'},
         {key: 'Matrícula'},
         {key: 'Curso'}
@@ -70,6 +70,13 @@ export default {
   computed: {
   },
   methods: {
+    getAluno (){
+      let services = new Services('aluno').getAll()
+      .then(result =>{
+        this.data = result
+        console.log("sucesso:", result)
+      })
+    },
     getBadge (status) {
       return status === 'Active' ? 'success'
         : status === 'Inactive' ? 'secondary'
@@ -87,7 +94,10 @@ export default {
       this.$router.push({path: userLink})
     }
 
-  }
+  },
+  mounted(){
+    this.getAluno()
+  },
 }
 </script>
 

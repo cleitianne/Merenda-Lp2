@@ -19,11 +19,6 @@ export default {
       }
     },
     {
-      name: 'Cadastro',
-      url: '/base/forms',
-      icon: 'icon-puzzle'
-    },
-    {
       name: 'Notificações',
       url: '/notifications/modals',
       icon: 'icon-bell'
@@ -33,6 +28,16 @@ export default {
       name: 'Login',
       url: '/pages/login',
       icon: 'icon-star'
-    }, 
+    },
+    {
+      name: 'Cadastro Aluno',
+      url: '/base/formsAlunos',
+      icon: 'icon-puzzle'
+    },
+    {
+      name: 'Cadastro Estoque',
+      url: '/base/formsEstoque',
+      icon: 'icon-puzzle'
+    }
   ]
 }
