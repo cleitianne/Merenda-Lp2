@@ -1,14 +1,6 @@
 {
-  "ProjectFilePath": "c:\\Users\\wj070\\Desktop\\Merenda\\Merenda\\Merenda-Lp2\\Merenda\\Merenda.csproj",
+  "ProjectFilePath": "c:\\Users\\olive\\Desktop\\ProjetosIfce\\MerendaEsse\\Merenda-Lp2\\Merenda\\Merenda.csproj",
   "TargetFramework": "netcoreapp2.0",
   "TagHelpers": [],
-  "Configuration": {
-    "ConfigurationName": "MVC-2.0",
-    "LanguageVersion": "2.0",
-    "Extensions": [
-      {
-        "ExtensionName": "MVC-2.0"
-      }
-    ]
-  }
+  "Configuration": null
 }
