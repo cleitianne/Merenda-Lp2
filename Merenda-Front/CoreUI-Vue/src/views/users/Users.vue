@@ -1,31 +1,68 @@
 <template>
-  <b-row>
-    <b-col cols="12" xl="6">
-      <transition name="slide">
-      <b-card :header="caption">
-        <b-table :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" responsive="sm" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" @row-clicked="rowClicked">
-          <template slot="nome" slot-scope="data">
-            <strong>{{data.item.nome}}</strong>
-          </template>
-          <template slot="matricula" slot-scope="data">
-            <strong>{{data.item.matricula}}</strong>
-          </template>
-         <template slot="curso" slot-scope="data">
-            <strong>{{data.item.curso}}</strong>
-          </template>
-        </b-table>
-        <nav>
-          <b-pagination size="sm" :total-rows="getRowCount(items)" :per-page="perPage" v-model="currentPage" prev-text="Anterior" next-text="Próximo" hide-goto-end-buttons/>
-        </nav>
-      </b-card>
-      </transition>
-    </b-col>
-  </b-row>
+   <div>
+     <div class="card">
+        <div class="card-header">
+          <h5>Lista de Alunos</h5>
+          <!--<div class="input-group ">-->
+        </div>   
+        <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Matricula</th>
+                    <th scope="col">Curso</th>
+
+                    <th scope="col"><div class="text-center">Edit</div></th>
+                    
+                    <!-- <th scope="col"><div class="text-center">Mais Informações</div></th> -->
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-if="alunos.length == 0">
+                    <td colspan="3"
+                        class="text-center font-italic">
+                        <label> Nenhum registro foi cadastrado </label>
+                      </td>
+                  </tr>
+                  <tr v-for="(row, index) in alunos"
+                    :key="row.id">
+                    
+                    <td>{{row.nome}}</td>
+                    <td>{{row.matricula}}</td>
+                    <td>{{row.curso}}</td>
+
+                    <td>
+                    <div class="text-center">
+                      <a  style="" class="fas fa-eye"
+                          href="#/users"
+                          @click="selectRow(index)"
+                          v-b-modal.modal1>
+                      </a>
+                    </div>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+   </div>
+    <div>
+      <b-modal id="modal1" title="Atualizar Alunos" size="lg" ok-title="Fechar" ok-only="">
+          <ModalContent v-bind="{dto: dto}"></ModalContent>
+      </b-modal>
+    </div>
+
+   </div>
+     
 </template>
 
 <script>
 import usersData from './UsersData'
 import Services from '../../Services/services.js'
+import ModalContent from '../base/FormUpdateAlunos'
 export default {
   name: 'Users',
   props: {
@@ -56,6 +93,8 @@ export default {
   },
   data: () => {
     return {
+      alunos: null,
+      dto: {},
       items: usersData.filter((user) => user.id < 42),
       fields: [
         {key: 'nome'},
@@ -67,15 +106,27 @@ export default {
       totalRows: 0
     }
   },
+  components:{
+    ModalContent
+  },
+
   computed: {
   },
   methods: {
+    selectRow(index) {
+      console.log('Index', index)
+      this.index = index
+      this.dto = this.alunos[this.index];
+    },
+
     getAluno (){
       let services = new Services('aluno').getAll()
       .then(result =>{
-        this.data = result
-        console.log("sucesso:", result)
+        this.alunos = result
+        console.log("sucesso: ", result)
+         console.log('alunos', this.alunos[0])
       })
+     
     },
     getBadge (status) {
       return status === 'Active' ? 'success'
@@ -94,6 +145,9 @@ export default {
       this.$router.push({path: userLink})
     }
 
+  },
+  created() {
+    
   },
   mounted(){
     this.getAluno()

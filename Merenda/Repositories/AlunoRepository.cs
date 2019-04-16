@@ -16,6 +16,12 @@ namespace Merenda.Repositories
             this._context = context;
         }
 
+        public Aluno GetByMatricula(string matricula){
+            var alunos =  _context.Alunos.AsQueryable().Where(a => a.Matricula == matricula).FirstOrDefault();
+            return alunos;
+
+        }
+
         public Aluno GetById (int id)
         {
             return _context.Alunos.Find(id);

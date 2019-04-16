@@ -4,15 +4,15 @@ import axios from 'axios'
 
 
 
-const baseUrl = 'http://10.20.30.9:49933/api/'
+const baseUrl = 'http://localhost:49933/api/'
 
 export default class ApiService {
   constructor (serviceName) {
     this.serviceName = serviceName
     if (serviceName != null && serviceName !== undefined) {
-      this.url = baseUrl + this.serviceName 
+      this.url = baseUrl + this.serviceName + '/'
     } else {
-      this.url = baseUrl
+      this.url = baseUrl + '/'
     }
     console.log('URLL: ', this.url)
   }
@@ -59,7 +59,7 @@ export default class ApiService {
   async update (newObject, id, sub = '') {
     return new Promise((resolve, reject) => {
       axios
-        .put(this.url + sub + id, newObject)
+        .put(this.url + sub  + id, newObject)
         .then(res => {
           resolve(res.data)
         })

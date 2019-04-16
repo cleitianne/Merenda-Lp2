@@ -78,8 +78,11 @@ namespace Merenda.Controllers
         }
         [HttpGet("aluno")]
         public IActionResult alunoPegaMerenda(string AlunoMatricula) {
-            //_alunoRepository
-            return Ok();
+            var aluno = _alunoRepository.GetByMatricula(AlunoMatricula);
+            if(aluno==null) {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }
