@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Merenda.Models
-{
+{   //Estrutura do Banco de Dados
     public class Aluno
     {
         public int Id { get; set; }

@@ -15,6 +15,10 @@ namespace Merenda.Repositories
         {
             this._context = context;
         }
+        public Estoque GetByCOD(int COD) {
+            var estoque =  _context.Estoque.AsQueryable().Where(e => e.COD == COD).FirstOrDefault();
+            return estoque;
+        }
 
         public Estoque GetById(int id)
         {

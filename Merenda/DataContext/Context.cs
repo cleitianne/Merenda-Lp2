@@ -15,7 +15,7 @@ namespace Merenda.DataContext
         public Context()
         {
         }
-
+        //As entidades que o Entity Framework gerencia;
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Nivel> Nivels { get; set; }
