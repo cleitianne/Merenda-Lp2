@@ -88,6 +88,8 @@ namespace Merenda.Migrations
 
                     b.Property<DateTime>("Dia");
 
+                    b.Property<bool>("Encerrado");
+
                     b.Property<string>("Turno");
 
                     b.HasKey("Id");

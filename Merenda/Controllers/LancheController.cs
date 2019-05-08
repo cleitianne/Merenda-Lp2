@@ -80,7 +80,7 @@ namespace Merenda.Controllers
             return Ok();
         }
         //Metodo \que verifica a matricula do aluno e desconta do codigo do estoque 
-        [HttpGet("aluno")]
+        [HttpGet("aluno")]  
         public IActionResult alunoPegaMerenda(string AlunoMatricula, int COD_Estoque) {
             var aluno = _alunoRepository.GetByMatricula(AlunoMatricula);
             var estoque = _estoqueRepository.GetByCOD(COD_Estoque);
@@ -96,6 +96,15 @@ namespace Merenda.Controllers
                 
             }
             return BadRequest("Aluno não existe");
+        }
+
+        [HttpGet("atual")]  
+        public IActionResult MerendaAtual() {
+            var entity = _repository.GetLancheAtual();
+            if(entity==null){
+                return BadRequest("Não existe oferta de lache");
+            }
+            return Ok(entity);
         }
     }
 }

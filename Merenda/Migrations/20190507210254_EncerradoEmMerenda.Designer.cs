@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Merenda.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190405145841_ThirdMigration")]
-    partial class ThirdMigration
+    [Migration("20190507210254_EncerradoEmMerenda")]
+    partial class EncerradoEmMerenda
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,6 +89,8 @@ namespace Merenda.Migrations
                     b.Property<int>("COD_Estoque");
 
                     b.Property<DateTime>("Dia");
+
+                    b.Property<bool>("Encerrado");
 
                     b.Property<string>("Turno");
 

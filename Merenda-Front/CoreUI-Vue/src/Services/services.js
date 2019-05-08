@@ -1,4 +1,5 @@
 import axios from 'axios'
+import toastr from 'toastr'
 
 
 
@@ -48,6 +49,7 @@ export default class ApiService {
       axios
         .post(this.url + sub, newObject)
         .then(res => {
+          toastr.success("Recurso criado com sucesso")
           resolve(res.data)
         })
         .catch(err => {
@@ -78,7 +80,7 @@ export default class ApiService {
         })
         .catch(err => {
           // if (err.response.data) {
-          // toastr.error(err.response.data)
+           toastr.error("falha ao deletar")
           // } else {
           // }
           reject(err.response)

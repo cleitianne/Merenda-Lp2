@@ -11,6 +11,8 @@ namespace Merenda.Models
         public DateTime Dia { get; set; }
         public string Turno { get; set; }
         public int COD_Estoque { get; set; }
+
+        public bool Encerrado { get; set; }
        
 
     }

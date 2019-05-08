@@ -35,6 +35,27 @@
       </b-col>
     </b-row>
     
+
+    <b-card v-if="lache!==null">
+        <b-col sm="5">
+          <h4 class="card-title mb-0">Lanche Ofertado</h4>
+          <h4></h4>
+        </b-col>
+      <b-col sm="7" class="d-none d-md-block">
+        <div class="form-group row">
+          <label class="col-sm-12 col-form-label">{{itemEstoque.descricao}}</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <b-button type="submit" size="sm" variant="primary" @click="confirmaLanche()"><i class="fa fa-dot-circle-o"></i> Finalizar Lanche</b-button>
+            
+          </div>
+        </div>
+      </b-col>
+    </b-card>
+
+
+
     <b-card>
         <b-col sm="5">
           <h4 class="card-title mb-0">Controle de Merenda Escolar</h4>
@@ -44,13 +65,13 @@
         <div class="form-group row">
           <label for="inputPassword3" class="col-sm-2 col-form-label">Matrícula</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Matrícula">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="Matrícula" v-model="matricula">
           </div>
         </div>
         <div class="form-group row">
           <div class="col-sm-10">
-            <b-button type="submit" size="sm" variant="primary"><i class="fa fa-dot-circle-o"></i> Enviar</b-button>
-            <b-button type="reset" size="sm" variant="danger"><i class="fa fa-ban"></i> Cancelar</b-button>
+            <b-button type="submit" size="sm" variant="primary" @click="confirmaLanche()"><i class="fa fa-dot-circle-o"></i> Enviar</b-button>
+            <!-- <b-button type="reset" size="sm" variant="danger"><i class="fa fa-ban"></i> Cancelar</b-button> -->
           </div>
         </div>
       </b-col>
@@ -69,6 +90,7 @@ import MainChartExample from './dashboard/MainChartExample'
 import SocialBoxChartExample from './dashboard/SocialBoxChartExample'
 import CalloutChartExample from './dashboard/CalloutChartExample'
 import { Callout } from '@coreui/vue'
+import Services from '../Services/services.js'
 export default {
   name: 'dashboard',
   components: {
@@ -84,6 +106,9 @@ export default {
   data: function () {
     return {
       selected: 'Month',
+      matricula: null,
+      itemEstoque: null,
+      lanche: null,
       tableItems: [
         {
           avatar: { url: 'img/avatars/1.jpg', status: 'success' },
@@ -175,8 +200,47 @@ export default {
     },
     flag (value) {
       return 'flag-icon flag-icon-' + value
+    },
+    getLacheOfertado () {
+      console.log("Lache Atual")
+      let services = new Services('Lanche/atual').getAll()
+      .then(result =>{
+        this.lanche = result
+        console.log("sucesso: ", result)
+        let estoqueService = new Services("Estoque").getById(this.lanche.id, "COD/")
+                                .then(estoque =>{
+                                  this.itemEstoque  = estoque
+                                  console.log("Estoque", estoque)
+                                })
+         
+      }).catch(err => {
+        console.log("DEU RUIM",err);
+      })
+    },
+
+    confirmaLanche(){
+      let filter = {
+         AlunoMatricula: this.matricula,
+         COD_Estoque: this.itemEstoque.cod
+      }
+
+      let services = new Services('Lanche/aluno').getAll(filter).then(
+        success => {
+          console.log('sucesso', success); 
+        },
+        // error => {
+        //   console.log('erro', error);
+        // }
+        
+      )
     }
-  }
+  },
+
+  created() {
+    console.log("CREATED")
+    this.getLacheOfertado()
+  },
+  
 }
 </script>
 

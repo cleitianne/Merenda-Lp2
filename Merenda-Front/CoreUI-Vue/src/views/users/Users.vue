@@ -14,7 +14,7 @@
                     <th scope="col">Matricula</th>
                     <th scope="col">Curso</th>
 
-                    <th scope="col"><div class="text-center">Edit</div></th>
+                    <th scope="col"><div class="text-center">Editar</div></th>
                     
                     <!-- <th scope="col"><div class="text-center">Mais Informações</div></th> -->
                     
@@ -36,7 +36,7 @@
 
                     <td>
                     <div class="text-center">
-                      <a  style="" class="fas fa-eye"
+                      <a  style="" class="icon-pencil"
                           href="#/users"
                           @click="selectRow(index)"
                           v-b-modal.modal1>

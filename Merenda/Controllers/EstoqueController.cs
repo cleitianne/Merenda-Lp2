@@ -38,6 +38,17 @@ namespace Merenda.Controllers
             return Ok(entity);
         }
 
+        [HttpGet("COD/{id}")]
+        public IActionResult GetCod(int id)
+        {
+            var entity = _repository.GetByCOD(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            return Ok(entity);
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] Estoque entity)
         {

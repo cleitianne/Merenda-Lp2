@@ -46,5 +46,10 @@ namespace Merenda.Repositories
             _context.Entry(exist).CurrentValues.SetValues(entity);
             _context.SaveChanges();
         }
+
+        public Lanche GetLancheAtual()
+        {
+            return _context.Lanche.AsQueryable().Where(e => e.Encerrado==false).FirstOrDefault();
+        }
     }
 }
