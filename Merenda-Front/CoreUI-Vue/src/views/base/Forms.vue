@@ -30,7 +30,9 @@
             :horizontal="true">
             <b-form-select v-model='curso' id="basicSelect"
               :plain="true"
-              :options="['Selecionar', 'Superior', 'Técnico']"
+              :options="['Selecionar', 'Bacharelado em Ciência da Computação', 'Bacharelado em Engenharia de Aquicultura',
+                        'Licenciatura em Química', 'Tecnologia em Hotelaria', 'Técnico em Aquicultura', 'Técnico em Eventos',
+                        'Técnico em Guia de Turismo', 'Técnico em Informática', 'Técnico em Petroquímica']"
               value="Selecionar">
             </b-form-select>
           </b-form-group>

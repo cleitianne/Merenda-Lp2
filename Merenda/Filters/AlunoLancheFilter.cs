@@ -8,5 +8,7 @@ namespace Merenda.Filters
         public String Curso { get; set; }
         public String Turno { get; set; }
         public String Nivel { get; set; }
+
+        
     }
 }

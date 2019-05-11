@@ -42,10 +42,22 @@ namespace Merenda.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Aluno entity)
         {
-           if(entity.Curso.Equals("Bacharelado em Ciência da Computação")){
+           if(entity.Curso.Equals("Bacharelado em Ciência da Computação" ) 
+              || entity.Curso.Equals("Bacharelado em Engenharia de Aquicultura")
+              || entity.Curso.Equals("Licenciatura em Química")
+              || entity.Curso.Equals("Tecnologia em Hotelaria")) {
                entity.Nivel = "Superior";
            }
-            Console.WriteLine("teste", entity.Nome);
+           else if(entity.Curso.Equals("Técnico em Aquicultura" )
+              || entity.Curso.Equals("Técnico em Eventos")
+              || entity.Curso.Equals("Técnico em Guia de Turismo")
+              || entity.Curso.Equals("Técnico em Informática")
+              || entity.Curso.Equals("Técnico em Petroquímica")) {
+                entity.Nivel = "Tecnico";
+            }
+
+
+            //Console.WriteLine("teste", entity.Nome);
             if(entity == null)
             {
                 return BadRequest("A entidade não pode ser null");

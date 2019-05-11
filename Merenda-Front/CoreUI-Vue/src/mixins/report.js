@@ -4,14 +4,14 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default {
   methods: {
-    buildPdfReport(data, labels, columns, widths, title)
+    buildPdfReport(data, labels, columns, widths, title, date, valor)
     {
       // Data de Hoje
-      var date = new Date();
-      var dia=date.getDate();
-      var mes=date.getMonth();
-      var ano=date.getFullYear();
-      date = dia + '/' + (++mes) + '/' + ano;
+      //var date = new Date();
+      var dia=date.substring(8, 10);
+      var mes=date.substring(5, 7);
+      var ano=date.substring(0, 4);
+      date = dia + '/' + (mes) + '/' + ano;
 
       // constrói o relatório
       var doc = {
@@ -67,7 +67,8 @@ export default {
       doc.content.push({text: '\nInstituto Federal do Ceará\n\n', style: 'alignLeft' });
       doc.content.push({text: date + '\n\n', style: 'alignLeft' });
       doc.content.push({text: title + '\n\n', style: 'header' });
-
+      doc.content.push({text: 'Valor total: ' + valor + ' R$' + '\n\n', style: 'alignLeft' });
+  
       var data_table = {
         layout: 'lightHorizontalLines', // optional
         table: {

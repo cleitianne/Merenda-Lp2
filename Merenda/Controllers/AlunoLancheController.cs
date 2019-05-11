@@ -1,7 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Merenda.DataContext;
+using Merenda.Filters;
 using Merenda.Models;
 using Merenda.Repositories;
+using Merenda.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Merenda.Controllers
@@ -10,10 +15,14 @@ namespace Merenda.Controllers
     [Route("api/AlunoLanche")]
     public class AlunoLancheController : Controller
     {
+        private IMapper _mapper;
         public AlunoLancheRepository _repository;
-        public AlunoLancheController(Context context)
+        public EstoqueRepository _estoqueRepository;
+        public AlunoLancheController(Context context, IMapper mapper)
         {
+            this._mapper = mapper;
             _repository = new AlunoLancheRepository(context);
+            _estoqueRepository = new EstoqueRepository(context);
         }
 
 
@@ -70,6 +79,27 @@ namespace Merenda.Controllers
             }
             _repository.Delete(id);
             return Ok();
+        }
+        [HttpGet("Relatorio")]
+        public IActionResult GetRelatorio (AlunoLancheFilter filter) {
+            Console.WriteLine(filter.Dia);
+            var alunoLache = _repository.GetForRelatorio(filter);
+
+            var result = _mapper.Map<IEnumerable<RelatorioViewModel>>(alunoLache);
+            return Ok(result);
+        }
+
+        [HttpGet("Valor")]
+        public IActionResult GetValorGasto (AlunoLancheFilter filter) {
+            Console.WriteLine(filter.Dia);
+            var valorFinal = 0.0;
+            var alunoLache = _repository.GetForRelatorio(filter);
+            foreach(var al in alunoLache){
+                var  estoque = _estoqueRepository.GetByCOD(al.Lanche.COD_Estoque);
+                valorFinal += estoque.Valor;
+            }
+            
+            return Ok(valorFinal);
         }
     }
     
