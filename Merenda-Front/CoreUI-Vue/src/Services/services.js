@@ -21,14 +21,24 @@ export default class ApiService {
  
 
   // GetAll
-  async getAll (filter = {}, sub = '') {
+  async getAll (filter = {}, sub = '', msg=null, msgErro=null) {
     let params = {
       params: filter
     }
     return axios
       .get(this.url + sub, params)
-      .then(response => response.data)
+      .then(response => {
+        if(msg !== null){
+          console.log("toastrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+          toastr.success(msg)
+        }
+        return response.data
+      })
       .catch(err => {
+        if(msgErro!== null)
+          toastr.error(msgErro);
+        else
+          toastr.error("Falha, verifique sua conexão!");
         console.log(err);
       })
   }
@@ -37,7 +47,9 @@ export default class ApiService {
     return new Promise((resolve, reject) => {
       axios
         .get(this.url + sub + id)
-        .then(res => resolve(res.data))
+        .then(res => {
+          resolve(res.data)
+        })
         .catch(err => {
           reject(err.response)
         })
@@ -49,6 +61,7 @@ export default class ApiService {
       axios
         .post(this.url + sub, newObject)
         .then(res => {
+          console.log("recurso criado com sucesso!")
           toastr.success("Recurso criado com sucesso")
           resolve(res.data)
         })

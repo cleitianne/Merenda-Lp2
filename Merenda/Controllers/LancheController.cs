@@ -18,11 +18,13 @@ namespace Merenda.Controllers
         public AlunoRepository _alunoRepository;
 
         public EstoqueRepository _estoqueRepository;
+        public AlunoLancheRepository _alunoLancheRepository;
         public LancheController(Context context)
         {
             _repository = new LancheRepository(context);
             _alunoRepository = new AlunoRepository(context);
             _estoqueRepository = new EstoqueRepository(context);
+            _alunoLancheRepository = new AlunoLancheRepository(context);
         }
 
 
@@ -81,13 +83,19 @@ namespace Merenda.Controllers
         }
         //Metodo \que verifica a matricula do aluno e desconta do codigo do estoque 
         [HttpGet("aluno")]  
-        public IActionResult alunoPegaMerenda(string AlunoMatricula, int COD_Estoque) {
+        public IActionResult alunoPegaMerenda(string AlunoMatricula, int COD_Estoque, int LancheId) {
             var aluno = _alunoRepository.GetByMatricula(AlunoMatricula);
             var estoque = _estoqueRepository.GetByCOD(COD_Estoque);
+    
             if(aluno!=null) {
                 estoque.QtdEstoque--;
                 if(estoque.QtdEstoque >= 0){
                     _estoqueRepository.Update(estoque, estoque.Id);
+                    var alunoLanche = new AlunoLanche(){
+                        AlunoId = aluno.Id,
+                        LancheId = LancheId
+                    };
+                    _alunoLancheRepository.Create(alunoLanche);
                     return Ok("Lanche Registrado");
                 }else {
                     return BadRequest("Estoque esgotado!");

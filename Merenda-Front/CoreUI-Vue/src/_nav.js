@@ -23,7 +23,11 @@ export default {
       url: '/notifications/modals',
       icon: 'icon-bell'
     },
-
+    {
+      name: 'Relatórios',
+      url: '/relatorio',
+      icon: 'icon-speedometer'
+    },
     {
       name: 'Login',
       url: '/pages/login',

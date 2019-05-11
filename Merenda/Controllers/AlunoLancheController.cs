@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Merenda.DataContext;
 using Merenda.Models;
 using Merenda.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Merenda.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/Aluno")]
-    public class AlunoController : Controller
-    {   //teste
-    
-        public AlunoRepository _repository;
-        public AlunoController(Context context)
+     [Produces("application/json")]
+    [Route("api/AlunoLanche")]
+    public class AlunoLancheController : Controller
+    {
+        public AlunoLancheRepository _repository;
+        public AlunoLancheController(Context context)
         {
-            _repository = new AlunoRepository(context);
+            _repository = new AlunoLancheRepository(context);
         }
 
 
         [HttpGet]
-        public IQueryable<Aluno> GetAll()
+        public IQueryable<AlunoLanche> GetAll()
         {
             return _repository.GetAll();
         }
@@ -32,21 +27,18 @@ namespace Merenda.Controllers
         public IActionResult GetById(int id)
         {
             var entity = _repository.GetById(id);
-            if(entity == null)
+            if (entity == null)
             {
                 return NotFound();
             }
             return Ok(entity);
         }
 
+
         [HttpPost]
-        public IActionResult Create([FromBody] Aluno entity)
+        public IActionResult Create([FromBody] AlunoLanche entity)
         {
-           if(entity.Curso.Equals("Bacharelado em Ciência da Computação")){
-               entity.Nivel = "Superior";
-           }
-            Console.WriteLine("teste", entity.Nome);
-            if(entity == null)
+            if (entity == null)
             {
                 return BadRequest("A entidade não pode ser null");
             }
@@ -58,9 +50,9 @@ namespace Merenda.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Aluno entity)
+        public IActionResult Update(int id, [FromBody] AlunoLanche entity)
         {
-            if(entity == null)
+            if (entity == null)
             {
                 return BadRequest();
             }
@@ -79,6 +71,6 @@ namespace Merenda.Controllers
             _repository.Delete(id);
             return Ok();
         }
-
     }
+    
 }

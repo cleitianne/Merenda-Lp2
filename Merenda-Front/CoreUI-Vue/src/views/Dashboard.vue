@@ -47,7 +47,7 @@
         </div>
         <div class="form-group row">
           <div class="col-sm-10">
-            <b-button type="submit" size="sm" variant="primary" @click="confirmaLanche()"><i class="fa fa-dot-circle-o"></i> Finalizar Lanche</b-button>
+            <b-button type="submit" size="sm" variant="primary" @click=" finalizarLanche()"><i class="fa fa-dot-circle-o"></i> Finalizar Lanche</b-button>
             
           </div>
         </div>
@@ -221,10 +221,12 @@ export default {
     confirmaLanche(){
       let filter = {
          AlunoMatricula: this.matricula,
-         COD_Estoque: this.itemEstoque.cod
+         COD_Estoque: this.itemEstoque.cod,
+         LancheId: this.lanche.id
+
       }
 
-      let services = new Services('Lanche/aluno').getAll(filter).then(
+      let services = new Services('Lanche/aluno').getAll(filter, '', "Lanche registrado com sucesso", "Falha. Verifique sua matricula!").then(
         success => {
           console.log('sucesso', success); 
         },
@@ -233,7 +235,11 @@ export default {
         // }
         
       )
+    },
+    finalizarLanche () {
+
     }
+    
   },
 
   created() {

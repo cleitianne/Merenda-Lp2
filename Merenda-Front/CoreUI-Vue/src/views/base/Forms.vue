@@ -35,7 +35,7 @@
             </b-form-select>
           </b-form-group>
           <div slot="footer">
-            <b-button @click="create()" type="submit" size="sm" variant="primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</b-button>
+            <b-button @click.stop.prevent="create()" type="submit" size="sm" variant="primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</b-button>
             <b-button type="reset" size="sm" variant="danger"><i class="fa fa-ban"></i> Deletar</b-button>
           </div>
           </b-form>

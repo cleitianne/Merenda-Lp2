@@ -21,5 +21,6 @@ namespace Merenda.DataContext
         public DbSet<Nivel> Nivels { get; set; }
         public DbSet<Estoque> Estoque { get; set; }
         public DbSet<Lanche> Lanche { get; set; }
+        public DbSet<AlunoLanche> AlunoLanche { get; set; }
     }
 }
