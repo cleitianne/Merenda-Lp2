@@ -52,10 +52,10 @@
             label-for="basicValor"
             :label-cols="3"
             :horizontal="true">
-            <b-form-input v-model='Valor' id="basicValor" type="number" autocomplete="Valor"></b-form-input>
+            <b-form-input v-model='Valor' id="basicValor" type="text" autocomplete="Valor"></b-form-input>
           </b-form-group>
           <div slot="footer">
-            <b-button @click="create()" type="submit" size="sm" variant="primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</b-button>
+            <b-button @click.stop.prevent="create()" type="submit" size="sm" variant="primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</b-button>
             <b-button type="reset" size="sm" variant="danger"><i class="fa fa-ban"></i> Deletar</b-button>
           </div>
           </b-form>
@@ -72,7 +72,7 @@ export default {
   data () {
     return {
       selected: [], // Must be an array reference!
-      show: true, Item:'', Codigo: null, Descricao:'', QtdUtilizada: null, QtdEstoque: null, Valor:null
+      show: true, Item:'', Codigo: null, Descricao:'', QtdUtilizada: 0, QtdEstoque: 0, Valor:0
     }
   },
   methods: {

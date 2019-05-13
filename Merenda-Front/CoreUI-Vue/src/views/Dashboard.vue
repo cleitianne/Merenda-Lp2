@@ -8,10 +8,10 @@
               <template slot="button-content">
                 <i class="icon-settings"></i>
               </template>
-              <b-dropdown-item>Relatório Completo</b-dropdown-item>
-              <b-dropdown-item>Relatório Parcial</b-dropdown-item>
+              <!-- <b-dropdown-item>Relatório Completo</b-dropdown-item>
+              <b-dropdown-item>Relatório Parcial</b-dropdown-item> -->
             </b-dropdown>
-            <h4 class="mb-0">102</h4>
+            <h4 class="mb-0">{{qtdTecnico}}</h4>
             <p>Técnico</p>
           </b-card-body>
           <card-line3-chart-example chartId="card-chart-03" class="chart-wrapper" style="height:70px;" height="70"/>
@@ -24,10 +24,10 @@
               <template slot="button-content">
                 <i class="icon-settings"></i>
               </template>
-              <b-dropdown-item>Relatório Completo</b-dropdown-item>
-              <b-dropdown-item>Relatório Parcial</b-dropdown-item>
+              <!-- <b-dropdown-item>Relatório Completo</b-dropdown-item>
+              <b-dropdown-item>Relatório Parcial</b-dropdown-item> -->
             </b-dropdown>
-            <h4 class="mb-0">19</h4>
+            <h4 class="mb-0">{{qtdSuperior}}</h4>
             <p>Superior</p>
           </b-card-body>
           <card-bar-chart-example chartId="card-chart-04" class="chart-wrapper px-3" style="height:70px;" height="70"/>
@@ -36,19 +36,26 @@
     </b-row>
     
 
-    <b-card v-if="lache!==null">
+    <b-card>
         <b-col sm="5">
           <h4 class="card-title mb-0">Lanche Ofertado</h4>
           <h4></h4>
         </b-col>
       <b-col sm="7" class="d-none d-md-block">
-        <div class="form-group row">
-          <label class="col-sm-12 col-form-label">{{itemEstoque.descricao}}</label>
+        <div v-if="lanche!==null">
+          <div class="form-group row">
+            <label class="col-sm-12 col-form-label">{{itemEstoque.descricao}}</label>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <b-button type="submit" size="sm" variant="primary" @click=" finalizarLanche()"><i class="fa fa-dot-circle-o"></i> Finalizar Lanche</b-button>
+              
+            </div>
+          </div>
         </div>
-        <div class="form-group row">
-          <div class="col-sm-10">
-            <b-button type="submit" size="sm" variant="primary" @click=" finalizarLanche()"><i class="fa fa-dot-circle-o"></i> Finalizar Lanche</b-button>
-            
+        <div v-else>
+          <div class="form-group row">
+            <label class="col-sm-12 col-form-label">Não há lanche sendo ofertado!</label>
           </div>
         </div>
       </b-col>
@@ -56,7 +63,7 @@
 
 
 
-    <b-card>
+    <b-card v-if="lanche!==null">
         <b-col sm="5">
           <h4 class="card-title mb-0">Controle de Merenda Escolar</h4>
           <h4></h4>
@@ -109,6 +116,9 @@ export default {
       matricula: null,
       itemEstoque: null,
       lanche: null,
+      qtdTecnico: 0,
+      qtdSuperior: 0,
+      dataLanche: null,
       tableItems: [
         {
           avatar: { url: 'img/avatars/1.jpg', status: 'success' },
@@ -202,19 +212,24 @@ export default {
       return 'flag-icon flag-icon-' + value
     },
     getLacheOfertado () {
-      console.log("Lache Atual")
-      let services = new Services('Lanche/atual').getAll()
+      
+      let services = new Services('Lanche/atual', '', null, "Não há lanche sendo ofertado!").getAll()
       .then(result =>{
+        
         this.lanche = result
-        console.log("sucesso: ", result)
-        let estoqueService = new Services("Estoque").getById(this.lanche.id, "COD/")
+       console.log('resultado', this.lanche)
+        this.dataLanche = result.dia
+        this.getNumeroDeAlunos()
+        let estoqueService = new Services("Estoque").getById(this.lanche.coD_Estoque, "COD/")
                                 .then(estoque =>{
                                   this.itemEstoque  = estoque
                                   console.log("Estoque", estoque)
+                                   
                                 })
          
       }).catch(err => {
         console.log("DEU RUIM",err);
+        this.lanche = null
       })
     },
 
@@ -228,7 +243,8 @@ export default {
 
       let services = new Services('Lanche/aluno').getAll(filter, '', "Lanche registrado com sucesso", "Falha. Verifique sua matricula!").then(
         success => {
-          console.log('sucesso', success); 
+          
+          this.getNumeroDeAlunos() 
         },
         // error => {
         //   console.log('erro', error);
@@ -237,14 +253,56 @@ export default {
       )
     },
     finalizarLanche () {
+      console.log('finalizando lanche', this.lanche)
+      let lanche2 = {
+        Id: this.lanche.id,
+        Dia: this.lanche.dia,
+        Turno: this.lanche.turno,
+        COD_Estoque: this.lanche.coD_Estoque,
+        Encerrado: true
+      }
+      let services = new Services('lanche').update(lanche2, this.lanche.id).then(
+        success => {
+          console.log('Lanche Finalizado', success)
+          //this.getLacheOfertado()
+          this.lanche = null 
+        },
+        error => {
+          console.log('erro', error);
+        }
+        
+      )
+    },
+    getNumeroDeAlunos () {
+      let filterSup = {
+        Dia: this.dataLanche,
+        Nivel: 'Superior'
+      }
+      let services = new Services('AlunoLanche').getAll(filterSup, 'Count').then(
+        success => {
+          this.qtdSuperior = success 
+        },
+      )
 
+
+
+       let filterTec = {
+        Dia: this.dataLanche,
+        Nivel: 'Tecnico'
+      }
+      let services2 = new Services('AlunoLanche').getAll(filterTec, 'Count').then(
+        success => {
+          this.qtdTecnico = success 
+        },
+      )
     }
     
   },
 
   created() {
-    console.log("CREATED")
+   
     this.getLacheOfertado()
+    
   },
   
 }

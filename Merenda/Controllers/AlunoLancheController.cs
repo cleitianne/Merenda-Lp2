@@ -82,7 +82,13 @@ namespace Merenda.Controllers
         }
         [HttpGet("Relatorio")]
         public IActionResult GetRelatorio (AlunoLancheFilter filter) {
-            Console.WriteLine(filter.Dia);
+            if(filter.Nivel != null){
+                if(filter.Nivel.Equals("Técnico")) {
+                    filter.Nivel = "Tecnico";
+                }
+            }
+            
+
             var alunoLache = _repository.GetForRelatorio(filter);
 
             var result = _mapper.Map<IEnumerable<RelatorioViewModel>>(alunoLache);
@@ -100,6 +106,20 @@ namespace Merenda.Controllers
             }
             
             return Ok(valorFinal);
+        }
+
+
+        [HttpGet("Count")]
+        public IActionResult CountAlunos (AlunoLancheFilter filter) {
+            Console.WriteLine(filter.Dia);
+           // var valorFinal = 0.0;
+            var alunoLache = _repository.GetForRelatorio(filter).Count();
+            // foreach(var al in alunoLache){
+            //     var  estoque = _estoqueRepository.GetByCOD(al.Lanche.COD_Estoque);
+            //     valorFinal += estoque.Valor;
+            // }
+            
+            return Ok(alunoLache);
         }
     }
     

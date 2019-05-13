@@ -18,21 +18,21 @@ export default {
         attributes: {}
       }
     },
-    {
-      name: 'Notificações',
-      url: '/notifications/modals',
-      icon: 'icon-bell'
-    },
-    {
+   {
       name: 'Relatórios',
       url: '/relatorio',
       icon: 'icon-speedometer'
     },
     {
-      name: 'Login',
-      url: '/pages/login',
-      icon: 'icon-star'
+      name: 'Ofertar Lanche',
+      url: '/lanche',
+      icon: 'icon-bell'
     },
+    // {
+    //   name: 'Login',
+    //   url: '/pages/login',
+    //   icon: 'icon-star'
+    // },
     {
       name: 'Cadastro Aluno',
       url: '/base/formsAlunos',

@@ -67,7 +67,7 @@ export default {
       doc.content.push({text: '\nInstituto Federal do Ceará\n\n', style: 'alignLeft' });
       doc.content.push({text: date + '\n\n', style: 'alignLeft' });
       doc.content.push({text: title + '\n\n', style: 'header' });
-      doc.content.push({text: 'Valor total: ' + valor + ' R$' + '\n\n', style: 'alignLeft' });
+      doc.content.push({text: 'Valor total: ' + 'R$ ' + valor  + '\n\n', style: 'alignLeft' });
   
       var data_table = {
         layout: 'lightHorizontalLines', // optional

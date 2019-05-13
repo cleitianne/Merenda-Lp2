@@ -7,6 +7,8 @@ const DefaultContainer = () => import('@/containers/DefaultContainer')
 // Views
 const Dashboard = () => import('@/views/Dashboard')
 const Relatorio = () => import('@/views/Relatorios')
+const Lanche = () => import('@/views/OfertaLanche')
+
 
 const Colors = () => import('@/views/theme/Colors')
 const Typography = () => import('@/views/theme/Typography')
@@ -84,6 +86,11 @@ export default new Router({
           component: Relatorio
         },
         {
+          path: 'lanche',
+          name: 'Lanche',
+          component: Lanche
+        },
+        {
           path: 'theme',
           redirect: '/theme/colors',
           name: 'Theme',
@@ -157,6 +164,7 @@ export default new Router({
               name: 'FormsAlunos',
               component: Forms
             },
+            
 
             {
               path: 'switches',
