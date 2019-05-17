@@ -20,6 +20,7 @@ const Widgets = () => import('@/views/Widgets')
 const Cards = () => import('@/views/base/Cards')
 const Forms = () => import('@/views/base/Forms')
 const FormsEstoque = () => import('@/views/base/FormsEstoque')
+const FormsImport = () => import('@/views/base/FormImport')
 const Switches = () => import('@/views/base/Switches')
 const Tables = () => import('@/views/base/Tables')
 const Tabs = () => import('@/views/base/Tabs')
@@ -163,6 +164,11 @@ export default new Router({
               path: 'formsAlunos',
               name: 'FormsAlunos',
               component: Forms
+            },
+            {
+              path: 'importacao',
+              name: 'importacao',
+              component: FormsImport
             },
             
 

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "73a34aa51796fac1e9582d86fdf130ba4eb96274"
+    "signature": "7c6d3b396669f053db82272c0ee47e86f0c9e703"
   },
   "compilationOptions": {
     "defines": [
@@ -30,7 +30,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.3",
           "Microsoft.EntityFrameworkCore.Tools": "2.2.3",
           "Microsoft.NETCore.App": "2.0.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3",
+          "WebApiContrib.Core.Formatter.Csv": "2.0.2"
         },
         "runtime": {
           "Merenda.dll": {}
@@ -4739,6 +4740,20 @@
           "System.Xml.XPath": "4.3.0"
         }
       },
+      "WebApiContrib.Core.Formatter.Csv/2.0.2": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebApiContrib.Core.Formatter.Csv.dll": {
+            "assemblyVersion": "2.0.2.0",
+            "fileVersion": "2.0.2.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/WebApiContrib.Core.Formatter.Csv.dll": {}
+        }
+      },
       "WindowsAzure.Storage/8.1.4": {
         "dependencies": {
           "Microsoft.Data.OData": "5.8.2",
@@ -7093,6 +7108,13 @@
       "sha512": "sha512-jw9oHHEIVW53mHY9PgrQa98Xo2IZ0ZjrpdOTmtvk+Rvg4tq7dydmxdNqUvJ5YwjDqhn75mBXWttWjiKhWP53LQ==",
       "path": "system.xml.xpath.xdocument/4.3.0",
       "hashPath": "system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
+    },
+    "WebApiContrib.Core.Formatter.Csv/2.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FtlBFPe5BHj9Vrok7aRWcImMnGOo9o/To6Wt7kDm8eqIAS13vZrOyqbZFnJihqdXMvh0KCh+4/VwPblApdfa8g==",
+      "path": "webapicontrib.core.formatter.csv/2.0.2",
+      "hashPath": "webapicontrib.core.formatter.csv.2.0.2.nupkg.sha512"
     },
     "WindowsAzure.Storage/8.1.4": {
       "type": "package",

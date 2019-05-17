@@ -103,27 +103,27 @@ export default class ApiService {
 
   count () {}
 
-  // async uploadCsv (csv, sub = '') {
-  //   let config = {
-  //     headers: {
-  //       'Content-Type': 'text/csv'
-  //     }
-  //   }
-  //   return new Promise((resolve, reject) => {
-  //     axios
-  //       .post(this.url + sub + '/import', csv, config)
-  //       .then(res => {
-  //         console.log(res)
-  //         resolve(res.data)
-  //         if (res.status === 200) {
-  //         } else if (res.status === 400 || res.status === 404 || res.status === 500) {
-  //         }
-  //       })
-  //       .catch(err => {
-  //         console.log('ERROR', err.response)
-  //         reject(err.response)
+  async uploadCsv (csv, sub = '') {
+    let config = {
+      headers: {
+        'Content-Type': 'text/csv'
+      }
+    }
+    return new Promise((resolve, reject) => {
+      axios
+        .post(this.url + sub + 'import', csv, config)
+        .then(res => {
+          console.log(res)
+          resolve(res.data)
+          if (res.status === 200) {
+          } else if (res.status === 400 || res.status === 404 || res.status === 500) {
+          }
+        })
+        .catch(err => {
+          console.log('ERROR', err.response)
+          reject(err.response)
 
-  //       })
-  //   })
-  // }
+        })
+    })
+  }
 }

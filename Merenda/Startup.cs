@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
+using WebApiContrib.Core.Formatter.Csv;
 
 namespace Merenda
 {
@@ -40,6 +42,15 @@ namespace Merenda
                             .AllowAnyMethod()
                             .AllowCredentials();
                     });
+            });
+            var csvFormatterOptions = new CsvFormatterOptions();
+
+
+            services.AddMvc(options =>
+            {                
+                options.InputFormatters.Add(new CsvInputFormatter(csvFormatterOptions));
+                options.OutputFormatters.Add(new CsvOutputFormatter(csvFormatterOptions));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
             });
         }
 

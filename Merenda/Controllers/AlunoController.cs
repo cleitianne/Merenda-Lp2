@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Merenda.DataContext;
 using Merenda.Models;
 using Merenda.Repositories;
+using Merenda.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -90,6 +91,35 @@ namespace Merenda.Controllers
             }
             _repository.Delete(id);
             return Ok();
+        }
+
+
+        [HttpPost]
+        [Route("import")]
+        public IActionResult Import([FromBody]List<AlunoImport> value)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                List<AlunoImport> data = value;
+                Console.WriteLine("------------------------");
+                Console.WriteLine(data[0].Nome);
+                Console.WriteLine(data[0].Curso);
+                Console.WriteLine(data[0].Matricula);
+                Console.WriteLine("------------------------");
+                foreach(var d in data){
+                    var aluno = new Aluno(){
+                        Curso = d.Curso,
+                        Matricula = d.Matricula,
+                        Nome = d.Nome
+                    };
+                    Create(aluno);
+                }
+                return Ok();
+            }
         }
 
     }
