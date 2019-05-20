@@ -37,7 +37,8 @@ namespace Merenda
                 options.AddPolicy("merenda",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:8080", "http://10.20.30.20:8080","http://178.128.174.100:8080", "http://178.128.174.100") //Url Front-End
+                        policy.WithOrigins("http://localhost:8080", "http://10.20.30.20:8080","http://178.128.174.100:8080", "http://178.128.174.100", 
+                                            "http://10.80.0.54:8080", "http://10.80.0.54:8081", "http://10.80.0.54:80", "http://10.80.0.54:1111") //Url Front-End
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowCredentials();
@@ -51,6 +52,16 @@ namespace Merenda
                 options.InputFormatters.Add(new CsvInputFormatter(csvFormatterOptions));
                 options.OutputFormatters.Add(new CsvOutputFormatter(csvFormatterOptions));
                 options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
+            });
+
+            // services.Configure<IISServerOptions>(options => 
+            // {
+            //     options.AutomaticAuthentication = false;
+            // });
+
+            services.Configure<IISOptions>(options => 
+            {
+                options.ForwardClientCertificate = false;
             });
         }
 
