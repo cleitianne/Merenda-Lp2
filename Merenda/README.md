@@ -39,7 +39,7 @@ $ sudo docker stop sql1
 $ sudo docker rm sql1
 ```
 
-## Rodar em sistema em background
+## Rodar sistema em background
 
 ```bash
 Rodar projeto
