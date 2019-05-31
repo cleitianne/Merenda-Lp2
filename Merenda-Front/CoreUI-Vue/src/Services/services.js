@@ -5,7 +5,7 @@ import toastr from 'toastr'
 
 
 
-const baseUrl = 'http://localhost:49933/api/'
+const baseUrl = 'http://200.17.32.23:49933/api/'
 
 export default class ApiService {
   constructor (serviceName) {
