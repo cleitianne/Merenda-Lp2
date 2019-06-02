@@ -9,12 +9,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
+
+
 namespace Merenda
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            
             //BuildWebHost(args).Run();
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -24,9 +27,9 @@ namespace Merenda
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseUrls("http://*:8081") // Porta
-                .UseConfiguration(config)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
+                .UseConfiguration(config)
                 .Build();
 
             host.Run();
@@ -35,6 +38,13 @@ namespace Merenda
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseKestrel(
+                    options =>
+                    {
+                        options.AddServerHeader = false;
+                        options.Listen(IPAddress.Loopback, 5000);
+                    }
+                )
                 .Build();
     }
 }

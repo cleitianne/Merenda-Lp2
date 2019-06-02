@@ -42,3 +42,14 @@ C:/Users/wj070/Desktop/Merenda/Merenda/Merenda-Lp2/Merenda/obj/Debug/netcoreapp2
 /home/joaojosefilho/Workspace/Deploy/Merenda-Lp2/Merenda/obj/Debug/netcoreapp2.0/Merenda.AssemblyInfo.cs
 /home/joaojosefilho/Workspace/Deploy/Merenda-Lp2/Merenda/obj/Debug/netcoreapp2.0/Merenda.dll
 /home/joaojosefilho/Workspace/Deploy/Merenda-Lp2/Merenda/obj/Debug/netcoreapp2.0/Merenda.pdb
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\bin\Debug\netcoreapp2.0\Merenda.deps.json
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\bin\Debug\netcoreapp2.0\Merenda.runtimeconfig.json
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\bin\Debug\netcoreapp2.0\Merenda.runtimeconfig.dev.json
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\bin\Debug\netcoreapp2.0\Merenda.dll
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\bin\Debug\netcoreapp2.0\Merenda.pdb
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\obj\Debug\netcoreapp2.0\Merenda.csprojAssemblyReference.cache
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\obj\Debug\netcoreapp2.0\Merenda.csproj.CoreCompileInputs.cache
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\obj\Debug\netcoreapp2.0\Merenda.AssemblyInfoInputs.cache
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\obj\Debug\netcoreapp2.0\Merenda.AssemblyInfo.cs
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\obj\Debug\netcoreapp2.0\Merenda.dll
+C:\Users\wj070\Desktop\Merenda\Merenda-Lp2\Merenda\obj\Debug\netcoreapp2.0\Merenda.pdb
