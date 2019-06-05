@@ -26,7 +26,7 @@ namespace Merenda
 
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://*:80") // Porta
+                .UseUrls("http://*:8082") // Porta
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .UseConfiguration(config)
