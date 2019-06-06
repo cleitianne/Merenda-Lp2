@@ -24,7 +24,7 @@
               label-for="data"
               :label-cols="3"
               :horizontal="true">
-              <b-form-input v-model='nome' id="data" type="date" autocomplete=""></b-form-input>
+              <b-form-input v-model='data' id="data" type="date" autocomplete=""></b-form-input>
             </b-form-group>
             
             <b-form-group
@@ -87,7 +87,7 @@ export default {
 
         Dia: this.data,
         Turno: this.turno,
-        COD_Estoque: this.COD_Estoque,
+        COD_Estoque: this.dto.cod,
         Encerrado: this.Encerrado
       }
       let services = new Service('lanche').create(lanche).then(

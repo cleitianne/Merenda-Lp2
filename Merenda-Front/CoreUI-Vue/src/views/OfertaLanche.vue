@@ -86,6 +86,7 @@ export default {
       console.log('Index', index)
       this.index = index
       this.dto = this.estoque[this.index];
+      console.log("dto: ", this.dto)
     },
 
     getAluno (){
