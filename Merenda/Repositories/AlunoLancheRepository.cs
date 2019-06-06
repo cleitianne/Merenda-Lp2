@@ -58,7 +58,7 @@ namespace Merenda.Repositories
                  alunoLanche  = alunoLanche.Where(al => al.Aluno.Nivel.Equals(filter.Nivel));
             }
             if(filter.Turno != null){
-                alunoLanche  = alunoLanche.Where(al => al.Lanche.Turno.Equals(filter.Nivel));
+                alunoLanche  = alunoLanche.Where(al => al.Lanche.Turno.Equals(filter.Turno));
             }
             if(filter.Dia != null){
                 alunoLanche  = alunoLanche.Where(al => al.Lanche.Dia.Day==filter.Dia.Day 
