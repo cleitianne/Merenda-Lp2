@@ -97,7 +97,7 @@ namespace Merenda.Controllers
 
         [HttpGet("Valor")]
         public IActionResult GetValorGasto (AlunoLancheFilter filter) {
-            Console.WriteLine(filter.Dia);
+            //Console.WriteLine(filter.Dia);
             var valorFinal = 0.0;
             var alunoLache = _repository.GetForRelatorio(filter);
             foreach(var al in alunoLache){
