@@ -105,11 +105,11 @@ namespace Merenda.Controllers
             else
             {
                 List<AlunoImport> data = value;
-                Console.WriteLine("------------------------");
-                Console.WriteLine(data[0].Nome);
-                Console.WriteLine(data[0].Curso);
-                Console.WriteLine(data[0].Matricula);
-                Console.WriteLine("------------------------");
+                // Console.WriteLine("------------------------");
+                // Console.WriteLine(data[0].Nome);
+                // Console.WriteLine(data[0].Curso);
+                // Console.WriteLine(data[0].Matricula);
+                // Console.WriteLine("------------------------");
                 foreach(var d in data){
                     var aluno = new Aluno(){
                         Curso = d.Curso,

@@ -111,7 +111,7 @@ namespace Merenda.Controllers
 
         [HttpGet("Count")]
         public IActionResult CountAlunos (AlunoLancheFilter filter) {
-            Console.WriteLine(filter.Dia);
+            //Console.WriteLine(filter.Dia);
            // var valorFinal = 0.0;
             var alunoLache = _repository.GetForRelatorio(filter).Count();
             // foreach(var al in alunoLache){
