@@ -76,6 +76,7 @@ export default class ApiService {
       axios
         .put(this.url + sub  + id, newObject)
         .then(res => {
+          toastr.success("Recurso atualizado com sucesso!")
           resolve(res.data)
         })
         .catch(err => {

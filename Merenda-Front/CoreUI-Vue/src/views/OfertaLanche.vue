@@ -14,7 +14,7 @@
                     <th scope="col">Descrição</th>
                     <th scope="col">Quantidade em Estoque</th>
 
-
+                    <th scope="col"><div class="text-center">Editar</div></th>  
                     <th scope="col"><div class="text-center">Ofertar</div></th>
                     
                     <!-- <th scope="col"><div class="text-center">Mais Informações</div></th> -->
@@ -36,8 +36,18 @@
                     <td>{{row.qtdEstoque}}</td>
 
                     <td>
+                      <div class="text-center">
+                        <a  style="" class="icon-pencil"
+                            href="#/lanche"
+                            @click="selectRow(index)"
+                            v-b-modal.modal2>
+                        </a>
+                      </div>
+                    </td>
+
+                  <td>
                     <div class="text-center">
-                      <a  style="" class="icon-pencil"
+                      <a  style="" class="icon-plus"
                           href="#/lanche"
                           @click="selectRow(index)"
                           v-b-modal.modal1>
@@ -50,11 +60,21 @@
             </div>
         </div>
    </div>
+   <div>
+      <b-modal id="modal2" title="Editar estoque" size="lg" ok-title="Fechar" ok-only="">
+          <ModalUpdateEstoque v-bind="{dto: dto}"></ModalUpdateEstoque>
+      </b-modal>
+    </div>
+
+
     <div>
       <b-modal id="modal1" title="Ofertar Lanche" size="lg" ok-title="Fechar" ok-only="">
           <ModalContent v-bind="{dto: dto}"></ModalContent>
       </b-modal>
     </div>
+
+
+   
 
    </div>
  
@@ -65,6 +85,7 @@
 //import usersData from './UsersData'
 import Services from '../Services/services.js'
 import ModalContent from './base/FormLanche'
+import ModalUpdateEstoque from './base/FormUpdateEstoque'
 export default {
   name: 'Users',
  
@@ -76,7 +97,8 @@ export default {
     }
   },
   components:{
-    ModalContent
+    ModalContent,
+    ModalUpdateEstoque
   },
 
   computed: {
@@ -86,7 +108,6 @@ export default {
       console.log('Index', index)
       this.index = index
       this.dto = this.estoque[this.index];
-      console.log("dto: ", this.dto)
     },
 
     getAluno (){
