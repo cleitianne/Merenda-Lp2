@@ -92,6 +92,7 @@ export default {
         Curso: this.curso,
         Dia: this.data
       }
+      console.log('filter', filter)
       let services = new Services('AlunoLanche').getAll(filter, 'Relatorio')
         .then(result =>{
             console.log("Resultado", result)

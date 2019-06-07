@@ -72,7 +72,7 @@
         <div class="form-group row">
           <label for="inputPassword3" class="col-sm-2 col-form-label">Matrícula</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Matrícula" v-model="matricula">
+            <input type="text" class="form-control" id="inputPassword3" placeholder="Matrícula" v-model="matricula">
           </div>
         </div>
         <div class="form-group row">
