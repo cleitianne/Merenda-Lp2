@@ -245,6 +245,7 @@ export default {
         success => {
           
           this.getNumeroDeAlunos() 
+          this.matricula = null
         },
         // error => {
         //   console.log('erro', error);
