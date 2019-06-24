@@ -66,7 +66,7 @@ export default class ApiService {
           resolve(res.data)
         })
         .catch(err => {
-          reject(err.response)
+          reject(err)
         })
     })
   }

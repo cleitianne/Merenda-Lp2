@@ -9,7 +9,7 @@
             label-for="basicName"
             :label-cols="3"
             :horizontal="true">
-            <b-form-input v-model='nome' id="basicName" type="text" autocomplete="name"></b-form-input>
+            <b-form-input v-model='dto.nome' id="basicName" type="text" autocomplete="name"></b-form-input>
           </b-form-group>
           <b-form-group
             description="Matrícula"
@@ -17,14 +17,14 @@
             label-for="basicName"
             :label-cols="3"
             :horizontal="true">
-            <b-form-input v-model='matricula' id="basicName" type="text" autocomplete="name"></b-form-input>
+            <b-form-input v-model='dto.matricula' id="basicName" type="text" autocomplete="name"></b-form-input>
           </b-form-group>
           <b-form-group
             label="Curso"
             label-for="basicSelect"
             :label-cols="3"
             :horizontal="true">
-            <b-form-select v-model='curso' id="basicSelect"
+            <b-form-select v-model='dto.curso' id="basicSelect"
               :plain="true"
               :options="['Selecionar', 'Superior', 'Técnico']"
               value="Selecionar">
@@ -74,9 +74,9 @@ export default {
       
       let aluno = {
         Id: this.dto.id,
-        Nome: this.nome,
-        Matricula: this.matricula,
-        Curso: this.curso
+        Nome: this.dto.nome,
+        Matricula: this.dto.matricula,
+        Curso: this.dto.curso
       }
       let services = new Service('aluno').update(aluno, this.dto.id).then(
         success => {

@@ -54,6 +54,15 @@
             :horizontal="true">
             <b-form-input v-model='Valor' id="basicValor" type="text" autocomplete="Valor"></b-form-input>
           </b-form-group>
+          <!-- <b-form-group
+            description="Valor"
+            label="Valor"
+            label-for="basicValor"
+            :label-cols="3"
+            :horizontal="true">
+            <money v-model="Valor" v-bind="money"></money> 
+          </b-form-group> -->
+          
           <div slot="footer">
             <b-button @click.stop.prevent="create()" type="submit" size="sm" variant="primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</b-button>
             <b-button type="reset" size="sm" variant="danger"><i class="fa fa-ban"></i> Deletar</b-button>
@@ -67,12 +76,23 @@
 
 <script>
 import Service from '../../Services/services.js'
+import {Money} from 'v-money'
 export default {
+  components: {Money},
   name: 'forms',
   data () {
     return {
       selected: [], // Must be an array reference!
-      show: true, Item:'', Codigo: null, Descricao:'', QtdUtilizada: 0, QtdEstoque: 0, Valor:0
+      show: true, Item:'', Codigo: null, Descricao:'', QtdUtilizada: 0, QtdEstoque: 0, Valor:0.0,
+      price: 0.0,
+      money: {
+          decimal: ',',
+          thousands: '.',
+          prefix: 'R$ ',
+          suffix: '',
+          precision: 2,
+          masked: false
+      }
     }
   },
   methods: {

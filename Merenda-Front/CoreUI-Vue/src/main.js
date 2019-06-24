@@ -9,11 +9,13 @@ import BootstrapVue from 'bootstrap-vue'
 import App from './App'
 import router from './router'
 import 'toastr/build/toastr.css';
+import money from 'v-money'
 
 // todo
 // cssVars()
 
 Vue.use(BootstrapVue)
+Vue.use(money, {precision: 4})
 
 /* eslint-disable no-new */
 new Vue({
