@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import firebase from 'firebase'
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
@@ -65,16 +66,27 @@ const User = () => import('@/views/users/User')
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
+    // {
+    //   path: '/',
+    //   redirect: '/pages/login',
+    // },
+    {
+      path: '*',
+      redirect: '/pages/login'
+    },
     {
       path: '/',
       redirect: '/dashboard',
       name: 'Home',
       component: DefaultContainer,
+      meta: {
+        requireAuth: true
+      },
       children: [
         {
           path: 'dashboard',
@@ -363,3 +375,14 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requireAuth = to.matched.some(record => record.meta.requireAuth);
+
+  if(requireAuth && !currentUser) next('/pages/login');
+  else if (!requireAuth && currentUser) next('/dashboard')
+  else next();
+});
+
+export default router;

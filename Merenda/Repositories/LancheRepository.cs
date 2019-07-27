@@ -47,9 +47,9 @@ namespace Merenda.Repositories
             _context.SaveChanges();
         }
 
-        public Lanche GetLancheAtual()
+        public IQueryable<Lanche> GetLancheAtual()
         {
-            return _context.Lanche.AsQueryable().Where(e => e.Encerrado==false).FirstOrDefault();
+            return _context.Lanche.AsQueryable().Where(e => e.Encerrado==false);//.FirstOrDefault();
         }
     }
 }

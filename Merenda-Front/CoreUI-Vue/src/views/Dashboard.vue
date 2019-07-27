@@ -11,7 +11,7 @@
               <!-- <b-dropdown-item>Relatório Completo</b-dropdown-item>
               <b-dropdown-item>Relatório Parcial</b-dropdown-item> -->
             </b-dropdown>
-            <h4 class="mb-0">{{qtdTecnico}}</h4>
+            <h4 class="mb-0">{{qtdTecnico/((this.itemEstoque != undefined && this.itemEstoque.length > 0) ? this.itemEstoque.length : 1)}}</h4>
             <p>Técnico</p>
           </b-card-body>
           <card-line3-chart-example chartId="card-chart-03" class="chart-wrapper" style="height:70px;" height="70"/>
@@ -27,7 +27,7 @@
               <!-- <b-dropdown-item>Relatório Completo</b-dropdown-item>
               <b-dropdown-item>Relatório Parcial</b-dropdown-item> -->
             </b-dropdown>
-            <h4 class="mb-0">{{qtdSuperior}}</h4>
+            <h4 class="mb-0">{{qtdSuperior/((this.itemEstoque != undefined && this.itemEstoque.length > 0) ? this.itemEstoque.length : 1)}}</h4>
             <p>Superior</p>
           </b-card-body>
           <card-bar-chart-example chartId="card-chart-04" class="chart-wrapper px-3" style="height:70px;" height="70"/>
@@ -42,10 +42,14 @@
           <h4></h4>
         </b-col>
       <b-col sm="7" class="d-none d-md-block">
-        <div v-if="lanche!==null">
-          <div class="form-group row">
-            <label class="col-sm-12 col-form-label">{{itemEstoque.descricao}}</label>
-          </div>
+        <div v-if="lanche.length > 0 && !finalizado">
+          <ul v-for="(item, index) in itemEstoque" :key="index">
+            <li>
+              
+                {{item.descricao}}
+              
+            </li>
+          </ul>
           <div class="form-group row">
             <div class="col-sm-10">
               <b-button type="submit" size="sm" variant="primary" @click=" finalizarLanche()"><i class="fa fa-dot-circle-o"></i> Finalizar Lanche</b-button>
@@ -63,7 +67,7 @@
 
 
 
-    <b-card v-if="lanche!==null">
+    <b-card v-if="lanche.length > 0 && !finalizado">
         <b-col sm="5">
           <h4 class="card-title mb-0">Controle de Merenda Escolar</h4>
           <h4></h4>
@@ -113,12 +117,14 @@ export default {
   data: function () {
     return {
       selected: 'Month',
+      finalizado: false,
       matricula: null,
       itemEstoque: null,
       lanche: null,
       qtdTecnico: 0,
       qtdSuperior: 0,
       dataLanche: null,
+      
       tableItems: [
         {
           avatar: { url: 'img/avatars/1.jpg', status: 'success' },
@@ -215,17 +221,26 @@ export default {
       
       let services = new Services('Lanche/atual', '', null, "Não há lanche sendo ofertado!").getAll()
       .then(result =>{
+          this.lanche = result
+          console.log('resultado', this.lanche)
+          
+          if(result !== null && result !== undefined && result.length > 0){
+              console.log('result[0]', result[0])
+              this.dataLanche = result[0].dia
+              this.getNumeroDeAlunos()
+              this.itemEstoque = []
+              this.lanche.forEach(element => {
+                let estoqueService = new Services("Estoque").getById(element.coD_Estoque, "COD/")
+                                    .then(estoque =>{
+                                      this.itemEstoque.push(estoque)  
+                                      //console.log("Estoque", estoque)
+                                      
+                                    })
+              
+            });
+          }
+          
         
-        this.lanche = result
-       console.log('resultado', this.lanche)
-        this.dataLanche = result.dia
-        this.getNumeroDeAlunos()
-        let estoqueService = new Services("Estoque").getById(this.lanche.coD_Estoque, "COD/")
-                                .then(estoque =>{
-                                  this.itemEstoque  = estoque
-                                  console.log("Estoque", estoque)
-                                   
-                                })
          
       }).catch(err => {
         console.log("DEU RUIM",err);
@@ -234,45 +249,60 @@ export default {
     },
 
     confirmaLanche(){
-      let filter = {
+      for(let i = 0; i <= this.itemEstoque.length; i++){
+        console.log("item", this.itemEstoque[i].cod)
+        console.log("lanche", this.lanche[i].id)
+        let filter = {
          AlunoMatricula: this.matricula,
-         COD_Estoque: this.itemEstoque.cod,
-         LancheId: this.lanche.id
+         COD_Estoque: this.itemEstoque[i].cod,
+         LancheId: this.lanche[i].id
 
-      }
+        }
 
       let services = new Services('Lanche/aluno').getAll(filter, '', "Lanche registrado com sucesso", "Falha. Verifique sua matricula!").then(
         success => {
           
           this.getNumeroDeAlunos() 
           this.matricula = null
+          console.log(success)
         },
         // error => {
         //   console.log('erro', error);
         // }
         
       )
+
+      }
+      
     },
     finalizarLanche () {
-      console.log('finalizando lanche', this.lanche)
+      for(let i = 0; i <= this.lanche.length; i++){
+        console.log('finalizando lanche', this.lanche)
       let lanche2 = {
-        Id: this.lanche.id,
-        Dia: this.lanche.dia,
-        Turno: this.lanche.turno,
-        COD_Estoque: this.lanche.coD_Estoque,
+        Id: this.lanche[i].id,
+        Dia: this.lanche[i].dia,
+        Turno: this.lanche[i].turno,
+        COD_Estoque: this.lanche[i].coD_Estoque,
         Encerrado: true
       }
-      let services = new Services('lanche').update(lanche2, this.lanche.id).then(
+      let services = new Services('lanche').update(lanche2, this.lanche[i].id).then(
         success => {
           console.log('Lanche Finalizado', success)
           //this.getLacheOfertado()
-          this.lanche = null 
+          //this.lanche[i] = null
+          
         },
         error => {
           console.log('erro', error);
         }
         
       )
+      this.finalizado = true;
+       
+
+      }
+      
+    
     },
     getNumeroDeAlunos () {
       let filterSup = {

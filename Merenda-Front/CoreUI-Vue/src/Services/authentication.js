@@ -8,7 +8,7 @@ export default class FireBaseService {
 
     constructor() {
         // Your web app's Firebase configuration
-        var firebaseConfig = {
+        var config = {
             apiKey: "AIzaSyAxfhBKpjek1GRMiK561sQJ-izjVGRWYUw",
             authDomain: "merendaifce.firebaseapp.com",
             databaseURL: "https://merendaifce.firebaseio.com",
